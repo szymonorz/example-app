@@ -8,27 +8,20 @@ import com.vaadin.flow.router.BeforeEnterListener;
 import com.vaadin.flow.router.Route;
 
 @Route("login")
-public class LoginView extends VerticalLayout implements BeforeEnterListener{
+public class LoginView extends VerticalLayout implements BeforeEnterListener {
+    private final LoginForm loginForm = new LoginForm();
 
-    private LoginForm loginForm = new LoginForm();
     public LoginView() {
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         loginForm.setAction("login");
-        add(
-                new H1("Sign in"),
-                loginForm
-        );
+        add(new H1("Sign in"), loginForm);
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
-        if (beforeEnterEvent.
-                getLocation().
-                getQueryParameters().
-                getParameters().
-                containsKey("error")){
+        if (beforeEnterEvent.getLocation().getQueryParameters().getParameters().containsKey("error")) {
             loginForm.setError(true);
         }
     }

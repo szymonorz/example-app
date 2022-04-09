@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SecurityService {
-
     public UserDetails getAuthenticatedUser(){
         SecurityContext context = SecurityContextHolder.getContext();
         Object principal = context.getAuthentication().getPrincipal();

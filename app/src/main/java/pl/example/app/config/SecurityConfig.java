@@ -48,8 +48,7 @@ public class SecurityConfig {
             auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
         }
     }
-
-
+    
     @Order(1)
     @Configuration
     public class RESTSecurityConfig extends WebSecurityConfigurerAdapter {

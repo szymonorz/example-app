@@ -11,7 +11,6 @@ import javax.annotation.security.PermitAll;
 @Route("/")
 @PermitAll
 public class UserView extends VerticalLayout {
-
     private SecurityService service;
     public UserView(SecurityService service){
         this.service = service;

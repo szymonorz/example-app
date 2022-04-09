@@ -3,8 +3,6 @@ package pl.example.app.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jsoup.Connection;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,12 +24,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 public class CAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
-    public CAuthenticationFilter(AuthenticationManager authenticationManager){
+
+    public CAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        if (request.getMethod().equals("POST")){
+        if (request.getMethod().equals("POST")) {
             try {
                 CustomUser user = new ObjectMapper().readValue(request.getInputStream(), CustomUser.class);
                 System.out.printf("%s %s\n", user.getUsername(), user.getPassword());
@@ -56,7 +56,7 @@ public class CAuthenticationFilter extends UsernamePasswordAuthenticationFilter 
                 .sign(algorithm);
         String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 2*24 * 60 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 2 * 24 * 60 * 60 * 1000))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
 
