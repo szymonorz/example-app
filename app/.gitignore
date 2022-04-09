@@ -35,3 +35,5 @@ build/
 ### Vaadin ###
 /frontend/
 /node_modules/
+*.js
+*.ts
