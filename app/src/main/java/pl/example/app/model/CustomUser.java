@@ -8,6 +8,10 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
+@DiscriminatorColumn(
+        name = "role",
+        discriminatorType = DiscriminatorType.INTEGER
+)
 public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +23,8 @@ public class CustomUser {
     @Size(min = 8, max = 256, message = "Password length must be between 8 and 256 characters")
     private String password;
 
+    @ManyToOne
+    private Role role;
     /*
         Settery i gettery MUSZĄ istnieć ponieważ inaczej Thymeleaf i Hibernate nie wiedzą
         co mają ze sobą zrobić i wrzucają wszędzie null.
@@ -47,5 +53,13 @@ public class CustomUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

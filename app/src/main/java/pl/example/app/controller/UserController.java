@@ -14,7 +14,7 @@ import pl.example.app.service.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/user/{id}")
     public ResponseEntity<UserInfo> viewUserInfo(@PathVariable int id) {
         UserInfo user = userService.getUserInfo(id);

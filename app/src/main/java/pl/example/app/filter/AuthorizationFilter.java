@@ -45,9 +45,12 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                     response.setContentType(APPLICATION_JSON_VALUE);
                     new ObjectMapper().writeValue(response.getOutputStream(), error);
                 }
-
             } else {
-                filterChain.doFilter(request, response);
+                Map<String, String> error = new HashMap<>();
+                response.setStatus(FORBIDDEN.value());
+                error.put("error_message", "Forbidden Access");
+                response.setContentType(APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), error);
             }
         }
     }
